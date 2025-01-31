@@ -4,6 +4,7 @@ import FormInput from "../components/FormInput";
 import Button from "../components/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function LoginandRegistration() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -16,6 +17,7 @@ function LoginandRegistration() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const  navigate  = useNavigate();
+  const [recaptchaToken, setRecaptchaToken] = useState(null); 
 
   const handleSignInClick = () => {
     setIsSignUp(false);
@@ -37,12 +39,18 @@ function LoginandRegistration() {
     setLoading(true);
     setError("");
 
+    if (!recaptchaToken) {
+      setError("Please verify reCAPTCHA.");
+      setLoading(false);
+      return;
+    }
+
     const endpoint = isSignUp
       ? "http://localhost:5000/api/auth/register"
       : "http://localhost:5000/api/auth/login";
 
       try {
-        const response = await axios.post(endpoint, formData);
+        const response = await axios.post(endpoint, { ...formData, recaptchaToken });
         console.log(response.data);
       
         if (!isSignUp) { 
@@ -143,7 +151,7 @@ function LoginandRegistration() {
             className="bg-white flex items-center justify-center flex-col px-8 md:px-12 py-8 md:h-full text-center"
             onSubmit={handleSubmit}
           >
-            <h1 className="font-bold text-2xl mb-4">Sign In</h1>
+            <h1 className="font-bold text-2xl mb-[-10]">Sign In</h1>
             <SocialIcon />
             <span className="text-sm mb-4">or use your account</span>
             <FormInput
@@ -162,16 +170,20 @@ function LoginandRegistration() {
               value={formData.password}
               onChange={handleInputChange}
             />
+            {/* Recaptcha */}
+            <div className="grecaptcha-wrapper shadow-sm rounded-md scale-95">
+              <ReCAPTCHA
+                sitekey="6LcMtcgqAAAAAFWkF8ztblXVX3GolwAO8S4-uYiy"
+                onChange={(token) => setRecaptchaToken(token)}
+              />
+            </div>
             <a
               href="./forget-password"
               className="text-sm text-gray-700 hover:underline mt-4 mb-4"
             >
               Forgot your password?
             </a>
-            {/* Recaptcha */}
-            <div className="recaptcha">
-              
-            </div>
+            
             <button
               type="submit"
               className="rounded-[20px] border border-[#3a91a5] bg-[#3a91a5] text-white text-xs font-bold py-3 px-11 uppercase tracking-wider cursor-pointer transition-transform hover:opacity-90 active:scale-95"

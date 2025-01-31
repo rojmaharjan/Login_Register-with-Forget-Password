@@ -19,10 +19,10 @@ const FormInput = ({ icon, label, onChange, ...props }) => {
       <input
         {...props}
         onChange={onChange} // Handle onChange passed down from parent
-        className="input-field h-full w-full outline-none text-base rounded border border-gray-300 px-12 transition-all duration-200 focus:border-[#3a91a5] placeholder:text-gray-400"
+        className="input-field h-[42px] max-[768px]:h-full w-full outline-none text-base rounded border border-gray-300 px-12 transition-all duration-200 focus:border-[#3a91a5] placeholder:text-gray-400"
       />
     </div>
-  );
+  ); 
 };
 
 export default FormInput;
