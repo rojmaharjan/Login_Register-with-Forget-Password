@@ -1,0 +1,28 @@
+import { Mail, Lock, User } from "lucide-react";
+
+const FormInput = ({ icon, label, onChange, ...props }) => {
+  const icons = {
+    mail: <Mail className="w-5 h-5" />,
+    lock: <Lock className="w-5 h-5" />,
+    person: <User className="w-5 h-5" />,
+  };
+
+  return (
+    <div className="input-wrapper relative w-full h-[54px] mb-6">
+      {/* Label for accessibility */}
+      {label && <label className="block text-sm mb-2">{label}</label>}
+
+      <div className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+        {icons[icon]}
+      </div>
+
+      <input
+        {...props}
+        onChange={onChange} // Handle onChange passed down from parent
+        className="input-field h-full w-full outline-none text-base rounded border border-gray-300 px-12 transition-all duration-200 focus:border-[#3a91a5] placeholder:text-gray-400"
+      />
+    </div>
+  );
+};
+
+export default FormInput;
