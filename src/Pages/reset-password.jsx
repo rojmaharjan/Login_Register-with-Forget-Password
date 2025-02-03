@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import FormInput from "../components/FormInput";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -28,19 +30,19 @@ const ResetPassword = () => {
     e.preventDefault();
 
     if (!newPassword || newPassword.length < 6) {
-      setError("Password must be at least 6 characters long.");
+      toast.error("Password must be at least 6 characters long.");
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setError("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
 
     const tokenToUse = token; 
 
     if (!tokenToUse) {
-      setError("Token is required.");
+      toast.error("Token is required.");
       return;
     }
 
@@ -63,12 +65,14 @@ const ResetPassword = () => {
       const data = await response.json(); 
 
       if (response.ok) {
-        setMessage("Your password has been reset successfully.");
+        toast.success("Your password has been reset successfully.");
+        setNewPassword("");
+      setConfirmPassword("");
       } else {
-        setError(data.error || "Failed to reset password. Please try again.");
+        toast.error(data.error || "Failed to reset password. Please try again.");
       }
     } catch (err) {
-      setError("An error occurred. Please try again later.");
+      toast.error("An error occurred. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -144,6 +148,7 @@ const ResetPassword = () => {
           Back to Sign In
         </a>
       </div>
+      <ToastContainer />
     </div>
   );
 };

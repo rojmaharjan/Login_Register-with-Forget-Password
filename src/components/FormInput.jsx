@@ -8,7 +8,7 @@ const FormInput = ({ icon, label, onChange, ...props }) => {
   };
 
   return (
-    <div className="input-wrapper relative w-full h-[54px] mb-6 group">
+    <div className="input-wrapper relative w-full  mb-6 group">
       {/* Label for accessibility */}
       {label && <label className="block text-sm mb-2">{label}</label>}
 

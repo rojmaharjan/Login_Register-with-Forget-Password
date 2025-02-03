@@ -13,9 +13,9 @@ function LoginandRegistration() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [isPanelActive, setIsPanelActive] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -48,6 +48,8 @@ function LoginandRegistration() {
       return;
     }
 
+    
+    
     const endpoint = isSignUp
       ? "http://localhost:5000/api/auth/register"
       : "http://localhost:5000/api/auth/login";
