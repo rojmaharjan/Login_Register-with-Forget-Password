@@ -7,7 +7,7 @@ const app = express();
 // Use CORS middleware globally
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow your frontend URL
+    origin: ['http://localhost:5174', 'http://localhost:5173'], // Allow your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     credentials: true, // Allow cookies (optional)
   })

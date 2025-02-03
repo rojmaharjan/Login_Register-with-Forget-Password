@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FaHome, FaChartPie, FaTasks, FaSignOutAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState('Home');
@@ -11,9 +13,16 @@ function Dashboard() {
   };
 
   const handleLogout = () => {
-    // Add logout logic here
     console.log('User logged out');
-    navigate('/');
+    toast.success("Logout successful!", {
+      position: "top-right",
+      autoClose: 150,
+      hideProgressBar: false, 
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      onClose: () => navigate("/")
+    });
   };
 
   return (
@@ -83,6 +92,7 @@ function Dashboard() {
           )}
         </main>
       </div>
+      <ToastContainer />
     </div>
   );
 }

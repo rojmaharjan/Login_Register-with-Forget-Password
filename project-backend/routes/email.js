@@ -43,7 +43,7 @@ router.post("/reset-password", cors(), async (req, res) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: "Password Reset Request",
-      text: `Click the link to reset your password: ${resetUrl}`,
+      text: `Click the link to reset your password: ${resetUrl} <br> This link is valid for 1 hour.`,
     };
 
     await transporter.sendMail(mailOptions);

@@ -1,26 +1,43 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import FormInput from "../components/FormInput";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
-  const [token, setToken] = useState(""); // Added state for token (if inputted manually)
+  const [confirmPassword, setConfirmPassword] = useState(""); 
+  const [token, setToken] = useState(""); 
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { token: urlToken } = useParams(); // Token from URL (optional if you're using an input field)
 
-  // handleSubmit function when form is submitted
+  // Get token from URL
+  const { token: urlToken } = useParams();
+  const location = useLocation();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const tokenFromUrl = urlParams.get('token');
+    if (tokenFromUrl) {
+      setToken(tokenFromUrl); 
+    } else if (urlToken) {
+      setToken(urlToken); 
+    }
+  }, [location, urlToken]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation for new password
     if (!newPassword || newPassword.length < 6) {
       setError("Password must be at least 6 characters long.");
       return;
     }
 
-    const tokenToUse = token || urlToken; // Use the token from the input field or URL
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    const tokenToUse = token; 
 
     if (!tokenToUse) {
       setError("Token is required.");
@@ -32,19 +49,18 @@ const ResetPassword = () => {
     setMessage("");
 
     try {
-      // Send request to API with token and newPassword
       const response = await fetch(
-        "http://localhost:5000/api/email/reset-password/confirm", // The endpoint to confirm password reset
+        "http://localhost:5000/api/email/reset-password/confirm", 
         {
-          method: "POST", // HTTP method
+          method: "POST", 
           headers: {
-            "Content-Type": "application/json", // Send data as JSON
+            "Content-Type": "application/json", 
           },
-          body: JSON.stringify({ token: tokenToUse, newPassword }), // Send token and newPassword
+          body: JSON.stringify({ token: tokenToUse, newPassword }), 
         }
       );
 
-      const data = await response.json(); // Parse the JSON response
+      const data = await response.json(); 
 
       if (response.ok) {
         setMessage("Your password has been reset successfully.");
@@ -73,17 +89,20 @@ const ResetPassword = () => {
         {error && <p className="mt-4 text-red-600 text-sm">{error}</p>}
 
         <form onSubmit={handleSubmit}>
-          {/* Input field for token */}
-          <FormInput
-            type="text"
-            name="person"
-            placeholder="Enter Token (if not in URL)"
-            icon="token"
-            value={token}
-            onChange={(e) => setToken(e.target.value)} // Update token state
-          />
+          {/* Token Input (optional, in case not in URL) */}
+          {!token && (
+            <FormInput
+              type="text"
+              name="token"
+              placeholder="Enter Token"
+              icon="token"
+              value={token}
+              onChange={(e) => setToken(e.target.value)} 
+              required
+            />
+          )}
 
-          {/* Input field for new password */}
+          {/* New Password Input */}
           <FormInput
             type="password"
             name="newPassword"
@@ -93,6 +112,18 @@ const ResetPassword = () => {
             onChange={(e) => setNewPassword(e.target.value)} // Update newPassword state
             required
           />
+
+          {/* Confirm Password Input */}
+          <FormInput
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            icon="lock"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)} // Update confirmPassword state
+            required
+          />
+
           <button
             type="submit"
             disabled={loading}

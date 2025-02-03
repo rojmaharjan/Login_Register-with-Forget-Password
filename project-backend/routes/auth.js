@@ -2,32 +2,29 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const pool = require("../db");
 const cors = require("cors");
-const axios = require("axios"); // ✅ Import axios
-require("dotenv").config(); // ✅ Load environment variables
+const axios = require("axios"); 
+require("dotenv").config(); 
 
 const router = express.Router();
 
-// Apply CORS to all routes in this file
 router.use(cors());
 
-// ✅ Register Route
-router.post("/register", async (req, res) => {
-  const { name, email, password, recaptchaToken } = req.body;
 
-  // Hash password
-  const hashedPassword = await bcrypt.hash(password, 10);
+router.post("/register", cors(), async (req, res) => {
+  const { name, email, password } = req.body;
 
-  // Verify reCAPTCHA
-  const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
-  const recaptchaURL = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaToken}`;
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
 
   try {
-    const response = await axios.post(recaptchaURL);
-    if (!response.data.success) {
-      return res.status(400).json({ error: "reCAPTCHA verification failed" });
+    const [existingUser] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
+    if (existingUser.length > 0) {
+      return res.status(400).json({ error: "Email already in use" });
     }
 
-    // ✅ Insert User into MySQL
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     await pool.query(
       "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
       [name, email, hashedPassword]
@@ -35,12 +32,12 @@ router.post("/register", async (req, res) => {
 
     res.json({ success: true, message: "Registration successful!" });
   } catch (error) {
-    console.error("❌ Error during registration:", error);
+    console.error("Error during registration:", error);
     res.status(500).json({ error: "Registration failed" });
   }
 });
 
-// ✅ Login Route
+
 router.post("/login", async (req, res) => {
   const { email, password, recaptchaToken } = req.body;
 

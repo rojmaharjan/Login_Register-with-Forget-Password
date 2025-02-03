@@ -67,6 +67,7 @@ function ForgetPassword() {
             icon="mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <button
             type="submit"

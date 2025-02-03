@@ -5,6 +5,9 @@ import Button from "../components/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function LoginandRegistration() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -39,7 +42,7 @@ function LoginandRegistration() {
     setLoading(true);
     setError("");
 
-    if (!recaptchaToken) {
+    if (!isSignUp && !recaptchaToken) {
       setError("Please verify reCAPTCHA.");
       setLoading(false);
       return;
@@ -53,11 +56,30 @@ function LoginandRegistration() {
         const response = await axios.post(endpoint, { ...formData, recaptchaToken });
         console.log(response.data);
       
-        if (!isSignUp) { 
-          navigate("/dashboard");
+        if (isSignUp) {
+          toast.success("Registration successful!", {
+            position: "top-right",
+            autoClose: 300,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            onClose: () => navigate("/dashboard"), 
+          });
+        } else {
+          toast.success("Sign-in successful!", {
+            position: "top-right",
+            autoClose: 300,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            onClose: () => navigate("/dashboard"), 
+          });
         }
       } catch (err) {  
         setError("Something went wrong. Please try again later.");
+        toast.error("Something went wrong. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -114,6 +136,7 @@ function LoginandRegistration() {
               icon="person"
               value={formData.name}
               onChange={handleInputChange}
+              required
             />
             <FormInput
               type="email"
@@ -122,6 +145,7 @@ function LoginandRegistration() {
               icon="mail"
               value={formData.email}
               onChange={handleInputChange}
+              required
             />
             <FormInput
               type="password"
@@ -130,6 +154,7 @@ function LoginandRegistration() {
               icon="lock"
               value={formData.password}
               onChange={handleInputChange}
+              required
             />
             <button
               type="submit"
@@ -161,6 +186,7 @@ function LoginandRegistration() {
               icon="mail"
               value={formData.email}
               onChange={handleInputChange}
+              required
             />
             <FormInput
               type="password"
@@ -169,6 +195,7 @@ function LoginandRegistration() {
               icon="lock"
               value={formData.password}
               onChange={handleInputChange}
+              required
             />
             {/* Recaptcha */}
             <div className="grecaptcha-wrapper shadow-sm rounded-md scale-95">
@@ -214,10 +241,9 @@ function LoginandRegistration() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
 
 export default LoginandRegistration;
-
-
