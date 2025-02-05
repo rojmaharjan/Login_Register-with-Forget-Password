@@ -8,18 +8,18 @@ const FormInput = ({ icon, label, onChange, ...props }) => {
   };
 
   return (
-    <div className="input-wrapper relative w-full  mb-6 group">
+    <div className="input-wrapper relative w-full max-[480px]:h-[52px] mb-6 group">
       {/* Label for accessibility */}
       {label && <label className="block text-sm mb-2">{label}</label>}
 
-      <div className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#3a91a5]">
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#3a91a5]">
         {icons[icon]}
       </div>
 
       <input
         {...props}
         onChange={onChange}   
-        className="input-field h-[42px] max-[768px]:h-full w-full outline-none text-base rounded border border-gray-300 px-12 transition-all duration-200 focus:border-[#3a91a5] placeholder:text-gray-400"
+        className="input-field h-[50px] max-[768px]:h-full w-[100%] outline-none text-base rounded border border-gray-300 px-12 transition-all duration-200 focus:border-[#3a91a5] placeholder:text-gray-400"
       />
     </div>
   ); 
