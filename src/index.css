@@ -51,3 +51,34 @@ body {
   }
 }
 
+/* Targeting iPad Mini 4 in Portrait Mode */
+@media (device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+  .container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+  }
+
+  .container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+  }
+
+  .container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+  } 
+
+  .container.right-panel-active .overlay {
+    transform: translateX(50%);
+  }
+
+  .container.right-panel-active .overlay-left {
+    transform: translateX(0);
+  }
+
+  .container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+  }
+}
+
+

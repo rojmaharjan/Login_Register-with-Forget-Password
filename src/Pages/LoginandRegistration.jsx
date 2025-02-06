@@ -93,7 +93,7 @@ function LoginandRegistration() {
       <div
         className={`container bg-[#F9F6E6] rounded-lg shadow-2xl relative overflow-hidden w-[95%] max-w-full ${
           isPanelActive ? "right-panel-active" : ""
-        } md:min-h-[95vh]`}
+        } md:min-h-[95vh] `}
       >
         {/* Mobile Overlay Panel */}
         <div className="md:hidden bg-[#3a91a5] text-white p-8 text-center">
@@ -123,7 +123,7 @@ function LoginandRegistration() {
           } md:block md:absolute  md:h-full md:w-1/2 md:opacity-0 md:z-1 md:left-0 md:transition-all md:duration-600`}
         >
           <form
-            className="bg-[#F8FAFC] flex items-center  flex-col px-8 md:px-12 py-8 md:h-full text-center"
+            className="bg-[#F8FAFC] flex items-center  flex-col px-8 md:px-12 py-4 md:h-full text-center"
             onSubmit={handleSubmit}
           >
             <h1 className="font-bold text-4xl ">Create Account</h1>
@@ -181,7 +181,7 @@ function LoginandRegistration() {
               {loading ? "Signing Up..." : "Sign Up"}
               </span>
             </button>
-            <div className="mt-8 text-l text-gray-700 flex ">
+            <div className="mt-8 text-l text-gray-700 flex flex-col md:flex-row ">
             <p>Already have an account?</p>
             <Link
               onClick={handleSignInClick}
@@ -202,12 +202,12 @@ function LoginandRegistration() {
           } md:block md:absolute md:top-0 md:h-full md:w-1/2 md:z-2 md:left-0 md:transition-all md:duration-600`}
         >
           <form
-            className="bg-[#F8FAFC] flex items-center  flex-col px-8 md:px-12 py-9 md:h-full text-center"
+            className="bg-[#F8FAFC] flex items-center  flex-col px-8 md:px-12 py-4 md:h-full text-center"
             onSubmit={handleSubmit}
           >
             <h1 className="font-bold text-4xl  ">Sign In</h1>
             <SocialIcon />
-            <span className="text-l mb-4 ">or use your account</span>
+            <span className="text-l mb-4 "><p>or</p> <p className="mt-2">use your account</p></span>
             <FormInput
               type="email"
               name="email"
@@ -282,14 +282,14 @@ function LoginandRegistration() {
         <div className="hidden md:block overlay-container absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-transform duration-600 z-100 " >
           <div className="overlay  text-white relative -left-full h-full w-[200%] transform translate-x-0 transition-transform duration-600">
             <div className="overlay-panel overlay-left bg-[url('/register.png')]  bg-[#BAD8B6]
-             bg-cover bg-center absolute flex items-center justify-center flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 -translate-x-[20%]">
+             bg-contain bg-no-repeat bg-center absolute flex items-center justify-center flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 -translate-x-[20%]">
               {/* <h1 className="font-bold text-2xl mb-4">Welcome Back!</h1>
               <p className="text-sm leading-5 tracking-wider mb-8">
                 To keep connected with us please login with your personal info
               </p> */}
             </div>
-            <div className="overlay-panel overlay-right bg-[url('/login.png')] bg-[#8EB486]
-             bg-cover bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
+            <div className="overlay-panel overlay-right bg-[url('/loginn.png')] bg-[#8EB486]
+             bg-contain bg-no-repeat bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full  w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
               {/* <h1 className="font-bold text-2xl mb-4 text-black ">Welcome!</h1>
               <p className="text-2xl font-bold leading-5 tracking-wider mb-8 text-black">
                 Sign In - To Enjoy
