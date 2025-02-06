@@ -128,8 +128,8 @@ function LoginandRegistration() {
           >
             <h1 className="font-bold text-4xl ">Create Account</h1>
             <SocialIcon />
-            <span className="text-sm mb-4 text-3l">
-              or use your email for registration
+            <span className="text-l mb-4 ">
+              <p>or</p><p className="mt-2 mb-2">use your email for registration</p>
             </span>
             <FormInput
               type="text"
@@ -139,6 +139,7 @@ function LoginandRegistration() {
               value={formData.name}
               onChange={handleInputChange}
               required
+              title="Enter your name"
             />
             <FormInput
               type="email"
@@ -148,6 +149,7 @@ function LoginandRegistration() {
               value={formData.email}
               onChange={handleInputChange}
               required
+              title="Enter your email address"
             />
             <FormInput
               type="password"
@@ -157,20 +159,34 @@ function LoginandRegistration() {
               value={formData.password}
               onChange={handleInputChange}
               required
+              title='Enter new password'
             />
-            <button
+            {/* <button
               type="submit"
               className="mt-4 rounded-[20px] border border-[#3a91a5] bg-[#BAD8B6] text-white text-xs font-bold py-3 px-11 uppercase tracking-wider cursor-pointer transition-transform hover:opacity-90 active:scale-95"
               disabled={loading}
             >
               {loading ? "Signing Up..." : "Sign Up"}
+            </button> */}
+             <button 
+             type="submit"className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-md group">
+              <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
+                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+              </span>
+              <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
+                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+              </span>
+              {/* <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"></span> */}
+              <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
+              {loading ? "Signing Up..." : "Sign Up"}
+              </span>
             </button>
-            <div className="mt-4 text-sm text-gray-700 flex ">
+            <div className="mt-8 text-l text-gray-700 flex ">
             <p>Already have an account?</p>
             <Link
               onClick={handleSignInClick}
               label="Sign In" 
-              className="block ml-2 text-sm text-gray-700 hover:text-blue-500 hover:underline curser-pointer"
+              className="block ml-2 text-gray-700 hover:text-blue-500 hover:underline curser-pointer"
             >
                Sign In
             </Link>  
@@ -200,6 +216,7 @@ function LoginandRegistration() {
               value={formData.email}
               onChange={handleInputChange}
               required
+              title="Enter your email address"
             />
             <FormInput
               type="password"
@@ -209,9 +226,10 @@ function LoginandRegistration() {
               value={formData.password}
               onChange={handleInputChange}
               required
+              title="Enter your Password"
             />
             <Link
-              href="./forget-password"
+              to="./forget-password"
               className="text-l text-gray-700 hover:text-blue-500 hover:underline w-auto  mb-4 cursor-pointer w-full "
             >
               Forgot your password?
@@ -224,19 +242,33 @@ function LoginandRegistration() {
               />
             </div>
             <br/>
-            <button
+            {/* <button
               type="submit"
-              className="rounded-[20px] border border-[#AAB99A] bg-[#3a91a5] text-white text-xs font-bold py-3 px-11 uppercase tracking-wider cursor-pointer transition-transform hover:opacity-90 active:scale-95"
+              className="rounded-[20px] border border-[#AAB99A] bg-[#3A91A5] text-white text-xs font-bold py-3 px-11  tracking-wider cursor-pointer transition-transform hover:opacity-90 active:scale-95 "
               disabled={loading}
             >
-              {loading ? "Signing In..." : "Sign In"}
+              {loading ? "Signing In..." : "Login"}
+            </button> */}
+            <button 
+            type="submit"
+            className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-md group">
+              {/* <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
+                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+              </span> */}
+              {/* <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
+                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+              </span> */}
+              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"></span>
+              <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
+              {loading ? "Signing In..." : "Login"}
+              </span>
             </button>
-            <div className="mt-4 text-sm text-gray-700 flex ">
+            <div className="mt-6 text-l text-gray-700 flex ">
             <p>Don't have account? </p>
             <Link
               onClick={handleSignUpClick}
               label="Sign Up" 
-              className="block ml-1 text-sm text-gray-700 hover:text-blue-500 hover:underline curser-pointer"
+              className="block ml-1 text-gray-700 hover:text-blue-500 hover:underline curser-pointer"
             >
                Click Here
             </Link>
@@ -256,11 +288,11 @@ function LoginandRegistration() {
                 To keep connected with us please login with your personal info
               </p> */}
             </div>
-            <div className="overlay-panel overlay-right bg-[url('/login.png')] bg-[#3a91a5]
-             bg-cover bg-center absolute flex items-center justify-center flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
-              {/* <h1 className="font-bold text-2xl mb-4">Hello, Friend!</h1>
-              <p className="text-sm leading-5 tracking-wider mb-8">
-                Enter your personal details and start your journey with us
+            <div className="overlay-panel overlay-right bg-[url('/login.png')] bg-[#8EB486]
+             bg-cover bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
+              {/* <h1 className="font-bold text-2xl mb-4 text-black ">Welcome!</h1>
+              <p className="text-2xl font-bold leading-5 tracking-wider mb-8 text-black">
+                Sign In - To Enjoy
               </p> */}
             </div>
           </div>
