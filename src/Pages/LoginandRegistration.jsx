@@ -281,14 +281,14 @@ function LoginandRegistration() {
         {/* Desktop Overlay Container */}
         <div className="hidden md:block overlay-container absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-transform duration-600 z-100 " >
           <div className="overlay  text-white relative -left-full h-full w-[200%] transform translate-x-0 transition-transform duration-600">
-            <div className="overlay-panel overlay-left bg-[url('/register.png')]  bg-[#BAD8B6]
+            <div className="overlay-panel overlay-left bg-[url('Pictures/register.png')]  bg-[#BAD8B6]
              bg-contain bg-no-repeat bg-center absolute flex items-center justify-center flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 -translate-x-[20%]">
               {/* <h1 className="font-bold text-2xl mb-4">Welcome Back!</h1>
               <p className="text-sm leading-5 tracking-wider mb-8">
                 To keep connected with us please login with your personal info
               </p> */}
             </div>
-            <div className="overlay-panel overlay-right bg-[url('/loginn.png')] bg-[#8EB486]
+            <div className="overlay-panel overlay-right bg-[url('Pictures/loginn.png')] bg-[#8EB486]
              bg-contain bg-no-repeat bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full  w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
               {/* <h1 className="font-bold text-2xl mb-4 text-black ">Welcome!</h1>
               <p className="text-2xl font-bold leading-5 tracking-wider mb-8 text-black">
