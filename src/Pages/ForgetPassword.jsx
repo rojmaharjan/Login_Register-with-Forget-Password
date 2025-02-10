@@ -69,18 +69,18 @@ function ForgetPassword() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button
-            type="submit"
-            name="password_reset_link"
+          <button  
+            type="submit" 
+            className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[20px] border border-[#3a91a5] text-white font-bold  tracking-wider cursor-pointer transition-transform group disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 active:scale-95 m-auto  justify-center"
             disabled={loading}
-            className={`mt-4 rounded-[20px] border border-[#3a91a5] bg-[#3a91a5] text-white text-xs font-bold py-3 px-11 uppercase tracking-wider cursor-pointer transition-transform ${
-              loading
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:opacity-90 active:scale-95"
-            }`}
           >
-            {loading ? "Sending..." : "Send Reset Link"}
+            <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"></span>
+            <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
+              {loading ? "Sending..." : "Send Reset Link"}
+            </span>
           </button>
+
+          
         </form>
         {message && <p className="mt-4 text-green-600 text-sm">{message}</p>}
         {error && <p className="mt-4 text-red-600 text-sm">{error}</p>}

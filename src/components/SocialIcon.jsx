@@ -3,7 +3,7 @@ import { BsTiktok } from 'react-icons/bs';
 
 const SocialIcon = () => {
   return (
-    <div className="social-container mt-4 mb-2   flex gap-[8px]  ">
+    <div className="social-container mt-6 mb-4   flex gap-[10px]  ">
       <a href="#" className="border border-gray-200 rounded-full inline-flex justify-center items-center m-0 h-10 w-10 hover:bg-gray-50 transition-colors " title='Facebook'>
         <Facebook className="w-5 h-5 text-gray-600 hover:text-blue-600 hover:border-blue-500" />
       </a>

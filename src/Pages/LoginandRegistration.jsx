@@ -51,32 +51,48 @@ function LoginandRegistration() {
     
     
     const endpoint = isSignUp
-      ? "http://localhost:5000/api/auth/register"
-      : "http://localhost:5000/api/auth/login";
+    ? "http://localhost:5000/api/auth/register"
+    : "http://localhost:5000/api/auth/login";
+
+  // Corrected data structure for each endpoint
+  const dataToSend = isSignUp
+    ? {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      }
+    : {
+        email: formData.email,
+        password: formData.password,
+        recaptchaToken
+      };
+
 
       try {
-        const response = await axios.post(endpoint, { ...formData, recaptchaToken });
+        const response = await axios.post(endpoint, dataToSend);
         console.log(response.data);
+        
       
         if (isSignUp) {
-          toast.success("Registration successful!", {
+          toast.success("Register successful!", {
             position: "top-right",
-            autoClose: 300,
+            autoClose: 250,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            onClose: () => navigate("/dashboard"), 
+          
+          
           });
         } else {
-          toast.success("Sign-in successful!", {
-            position: "top-right",
-            autoClose: 300,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            onClose: () => navigate("/dashboard"), 
+         toast.success("Sign In  successful!", {
+          position: "top-right",
+          autoClose: 250,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          onClose: () => navigate("/dashboard"), 
           });
         }
       } catch (err) {  
@@ -89,11 +105,11 @@ function LoginandRegistration() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#AAB99A] flex items-center justify-center p-2">
+    <div className=" w-full bg-[#] flex items-center justify-center ">
       <div
-        className={`container bg-[#F9F6E6] rounded-lg shadow-2xl relative overflow-hidden w-[95%] max-w-full ${
+        className={`container bg-[#F9F6E6] relative overflow-hidden w-[full] max-w-full ${
           isPanelActive ? "right-panel-active" : ""
-        } md:min-h-[95vh] `}
+        } md:min-h-[100vh] `}
       >
         {/* Mobile Overlay Panel */}
         <div className="md:hidden bg-[#3a91a5] text-white p-8 text-center">
@@ -122,7 +138,7 @@ function LoginandRegistration() {
             isSignUp ? "block" : "hidden"
           } md:block md:absolute  md:h-full md:w-1/2 md:opacity-0 md:z-1 md:left-0 md:transition-all md:duration-600`}
         >
-          <form
+           <form
             className="bg-[#F8FAFC] flex items-center  flex-col px-8 md:px-12 py-4 md:h-full text-center"
             onSubmit={handleSubmit}
           >
@@ -169,14 +185,14 @@ function LoginandRegistration() {
               {loading ? "Signing Up..." : "Sign Up"}
             </button> */}
              <button 
-             type="submit"className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-md group">
-              <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
+             type="submit" className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group">
+              {/* <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
               </span>
               <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span>
-              {/* <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"></span> */}
+              </span> */}
+              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"></span>
               <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
               {loading ? "Signing Up..." : "Sign Up"}
               </span>
@@ -193,6 +209,9 @@ function LoginandRegistration() {
             </div>
 
           </form>
+           
+         
+
         </div>
 
         {/* Sign In Container */}
@@ -201,7 +220,7 @@ function LoginandRegistration() {
             !isSignUp ? "block" : "hidden"
           } md:block md:absolute md:top-0 md:h-full md:w-1/2 md:z-2 md:left-0 md:transition-all md:duration-600`}
         >
-          <form
+        <form
             className="bg-[#F8FAFC] flex items-center  flex-col px-8 md:px-12 py-4 md:h-full text-center"
             onSubmit={handleSubmit}
           >
@@ -251,14 +270,14 @@ function LoginandRegistration() {
             </button> */}
             <button 
             type="submit"
-            className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-md group">
+            className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group">
               {/* <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
               </span> */}
               {/* <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
               </span> */}
-              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"></span>
+              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-100 -translate-x-full bg-indigo-600 group-hover:translate-x-0"></span>
               <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
               {loading ? "Signing In..." : "Login"}
               </span>
@@ -276,20 +295,21 @@ function LoginandRegistration() {
             
 
           </form>
+          
         </div>
 
         {/* Desktop Overlay Container */}
         <div className="hidden md:block overlay-container absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-transform duration-600 z-100 " >
           <div className="overlay  text-white relative -left-full h-full w-[200%] transform translate-x-0 transition-transform duration-600">
-            <div className="overlay-panel overlay-left bg-[url('Pictures/register.png')]  bg-[#BAD8B6]
-             bg-contain bg-no-repeat bg-center absolute flex items-center justify-center flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 -translate-x-[20%]">
+            <div className="overlay-panel overlay-left bg-[url('Pictures/register.png')]  bg-[#AAB99A]
+             bg-contain bg-no-repeat bg-[length:90%] bg-center absolute flex items-center justify-center flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 -translate-x-[20%]">
               {/* <h1 className="font-bold text-2xl mb-4">Welcome Back!</h1>
               <p className="text-sm leading-5 tracking-wider mb-8">
                 To keep connected with us please login with your personal info
               </p> */}
             </div>
             <div className="overlay-panel overlay-right bg-[url('Pictures/loginn.png')] bg-[#8EB486]
-             bg-contain bg-no-repeat bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full  w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
+             bg-contain bg-no-repeat bg-[length:90%] bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full  w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
               {/* <h1 className="font-bold text-2xl mb-4 text-black ">Welcome!</h1>
               <p className="text-2xl font-bold leading-5 tracking-wider mb-8 text-black">
                 Sign In - To Enjoy

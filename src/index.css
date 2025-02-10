@@ -6,6 +6,7 @@
 
 body {
   font-family: "Poppins", serif;
+  background-color: #F8FAFC;
 }
 
 @media (min-width: 768px) {
@@ -79,6 +80,6 @@ body {
   .container.right-panel-active .overlay-right {
     transform: translateX(20%);
   }
-}
+} 
 
 

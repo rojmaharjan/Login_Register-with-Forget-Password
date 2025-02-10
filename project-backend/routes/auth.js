@@ -9,8 +9,8 @@ const router = express.Router();
 
 router.use(cors());
 
-
-router.post("/register", cors(), async (req, res) => {
+// Registration Endpoint
+router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -18,13 +18,16 @@ router.post("/register", cors(), async (req, res) => {
   }
 
   try {
+    // Check if email is already taken
     const [existingUser] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
     if (existingUser.length > 0) {
       return res.status(400).json({ error: "Email already in use" });
     }
 
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Insert new user
     await pool.query(
       "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
       [name, email, hashedPassword]
@@ -33,28 +36,33 @@ router.post("/register", cors(), async (req, res) => {
     res.json({ success: true, message: "Registration successful!" });
   } catch (error) {
     console.error("Error during registration:", error);
-    res.status(500).json({ error: "Registration failed" });
+    res.status(500).json({ error: "Registration failed. Please try again." });
   }
 });
 
-
+// Login Endpoint
 router.post("/login", async (req, res) => {
   const { email, password, recaptchaToken } = req.body;
 
-  // Verify reCAPTCHA
-  const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
-  const recaptchaURL = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaToken}`;
+  // Ensure email and password are provided
+  if (!email || !password) {
+    return res.status(400).json({ error: "Email and password are required" });
+  }
 
   try {
-    const response = await axios.post(recaptchaURL);
-    if (!response.data.success) {
-      return res.status(400).json({ error: "reCAPTCHA verification failed" });
+    // Verify reCAPTCHA only for login
+    if (recaptchaToken) {
+      const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+      const recaptchaURL = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaToken}`;
+
+      const response = await axios.post(recaptchaURL);
+      if (!response.data.success) {
+        return res.status(400).json({ error: "reCAPTCHA verification failed" });
+      }
     }
 
-    // ✅ Fetch User from MySQL
-    const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [
-      email,
-    ]);
+    // Fetch user from database
+    const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
 
     if (rows.length === 0) {
       return res.status(401).json({ error: "Invalid email or password" });
@@ -62,7 +70,7 @@ router.post("/login", async (req, res) => {
 
     const user = rows[0];
 
-    // ✅ Check Password
+    // Check password
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       return res.status(401).json({ error: "Invalid email or password" });
@@ -70,8 +78,8 @@ router.post("/login", async (req, res) => {
 
     res.json({ success: true, message: "Login successful", user });
   } catch (error) {
-    console.error("❌ Error during login:", error);
-    res.status(500).json({ error: "Login failed" });
+    console.error("Error during login:", error);
+    res.status(500).json({ error: "Login failed. Please try again." });
   }
 });
 
