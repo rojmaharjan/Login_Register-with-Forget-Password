@@ -212,7 +212,7 @@ function LoginandRegistration() {
             </div>
             
 
-          </form>
+        </form>
           
         </div> 
         {/* Sign Up Container */}
@@ -221,7 +221,7 @@ function LoginandRegistration() {
             isSignUp ? "block" : "hidden"
           } md:block md:absolute  md:h-full md:w-1/2 md:opacity-0 md:z-1 md:left-0 md:transition-all md:duration-600`}
         >
-           <form
+          <form
             className="bg-[#F8FAFC] flex items-center  flex-col px-8 md:px-12 py-4 md:h-full text-center"
             onSubmit={handleSubmit}
           >
@@ -294,24 +294,17 @@ function LoginandRegistration() {
           </form>
         </div>
 
-        
-
         {/* Desktop Overlay Container */}
-        <div className="hidden md:block overlay-container absolute top-0 left-0 w-1/2 h-full overflow-hidden transition-transform duration-600 z-100 " >
+        <div className="hidden md:block overlay-container absolute top-0 left-0 w-1/2 h-full overflow-hidden transition-transform duration-600 z-100">
           <div className="overlay  text-white relative -left-full h-full w-[200%] transform translate-x-0 transition-transform duration-600">
+            {/* Sign Up Picture */}
             <div className="overlay-panel overlay-left bg-[url('Pictures/register.png')]  bg-[#AAB99A]
-             bg-contain bg-no-repeat bg-[length:90%] bg-center absolute flex items-center justify-center flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 -translate-x-[20%]">
-              {/* <h1 className="font-bold text-2xl mb-4">Welcome Back!</h1>
-              <p className="text-sm leading-5 tracking-wider mb-8">
-                To keep connected with us please login with your personal info
-              </p> */}
+             bg-contain bg-no-repeat bg-[length:93%] bg-center absolute flex items-center justify-center flex-col p-10 text-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-600 -translate-x-[20%]">
+             
             </div>
+            {/* Sign In Picture */}
             <div className="overlay-panel overlay-right bg-[url('Pictures/loginn.png')] bg-[#8EB486]
-             bg-contain bg-no-repeat bg-[length:90%] bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full  w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
-              {/* <h1 className="font-bold text-2xl mb-4 text-black ">Welcome!</h1>
-              <p className="text-2xl font-bold leading-5 tracking-wider mb-8 text-black">
-                Sign In - To Enjoy
-              </p> */}
+             bg-contain bg-no-repeat bg-[length:91%] bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full  w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
             </div>
           </div>
         </div>
