@@ -47,8 +47,6 @@ function LoginandRegistration() {
       setLoading(false);
       return;
     }
-
-    
     
     const endpoint = isSignUp
     ? "http://localhost:5000/api/auth/register"
@@ -138,83 +136,69 @@ function LoginandRegistration() {
             !isSignUp ? "block" : "hidden"
           } md:block md:absolute md:top-0 md:h-full md:w-1/2 md:z-2 md:right-0 md:transition-all md:duration-600`}
         >
-        <form
-            className="bg-[#F8FAFC] flex items-center  flex-col px-8 md:px-12 py-4 md:h-full text-center"
-            onSubmit={handleSubmit}
-          >
-            <h1 className="font-bold text-4xl  ">Sign In</h1>
-            <SocialIcon />
-            <span className="text-l mb-4 "><p>or</p> <p className="mt-2">use your account</p></span>
-            <FormInput
-              type="email"
-              name="email"
-              placeholder="Email"
-              icon="mail"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              title="Enter your email address"
-            />
-            <FormInput
-              type="password"
-              name="password"
-              placeholder="Password"
-              icon="lock"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-              title="Enter your Password"
-            />
-            <Link
-              to="./forget-password"
-              className="text-l text-gray-700 hover:text-blue-500 hover:underline w-auto  mb-4 cursor-pointer w-full "
+          <form
+              className="bg-[#F8FAFC] flex items-center  flex-col px-8 md:px-12 py-4 md:h-full text-center"
+              onSubmit={handleSubmit}
             >
-              Forgot your password?
-            </Link>
-            {/* Recaptcha */}
-            <div className="grecaptcha-wrapper shadow-sm rounded-md scale-95">
-              <ReCAPTCHA
-                sitekey="6LcMtcgqAAAAAFWkF8ztblXVX3GolwAO8S4-uYiy"
-                onChange={(token) => setRecaptchaToken(token)}
+              <h1 className="font-bold text-4xl  ">Sign In</h1>
+              <SocialIcon />
+              <span className="text-l mb-4 "><p>or</p> <p className="mt-2">use your account</p></span>
+              <FormInput
+                type="email"
+                name="email"
+                placeholder="Email"
+                icon="mail"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                title="Enter your email address"
               />
-            </div>
-            <br/>
-            {/* <button
-              type="submit"
-              className="rounded-[20px] border border-[#AAB99A] bg-[#3A91A5] text-white text-xs font-bold py-3 px-11  tracking-wider cursor-pointer transition-transform hover:opacity-90 active:scale-95 "
-              disabled={loading}
-            >
-              {loading ? "Signing In..." : "Login"}
-            </button> */}
-            <button 
-            type="submit"
-            className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group">
-              {/* <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
-                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span> */}
-              {/* <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
-                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span> */}
-              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-100 -translate-x-full bg-indigo-600 group-hover:translate-x-0"></span>
-              <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
-              {loading ? "Signing In..." : "Login"}
-              </span>
-            </button>
-            <div className="mt-6 text-l text-gray-700 flex ">
-            <p>Don't have account? </p>
-            <Link
-              onClick={handleSignUpClick}
-              label="Sign Up" 
-              className="block ml-1 text-gray-700 hover:text-blue-500 hover:underline curser-pointer"
-            >
-               Click Here
-            </Link>
-            </div>
-            
-
-        </form>
-          
+              <FormInput
+                type="password"
+                name="password"
+                placeholder="Password"
+                icon="lock"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+                title="Enter your Password"
+              />
+              <Link
+                to="./forget-password"
+                className="text-l text-gray-700 hover:text-blue-500 hover:underline w-auto  mb-4 cursor-pointer w-full "
+              >
+                Forgot your password?
+              </Link>
+              {/* Recaptcha */}
+              <div className="grecaptcha-wrapper shadow-sm rounded-md scale-95">
+                <ReCAPTCHA
+                  sitekey="6LcMtcgqAAAAAFWkF8ztblXVX3GolwAO8S4-uYiy"
+                  onChange={(token) => setRecaptchaToken(token)}
+                />
+              </div>
+              <br/>
+              <button 
+                type="submit"
+                className="relative flex items-center justify-center w-[100px] px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group"
+              >
+                <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-100 -translate-x-full bg-indigo-600 group-hover:translate-x-0"></span>
+                <span className="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-white">
+                  {loading ? "Signing In..." : "Login"}
+                </span>
+              </button>
+              <div className="mt-6 text-l text-gray-700 flex ">
+              <p>Don't have account? </p>
+              <Link
+                onClick={handleSignUpClick}
+                label="Sign Up" 
+                className="block ml-1 text-gray-700 hover:text-blue-500 hover:underline curser-pointer"
+              >
+                Click Here
+              </Link>
+              </div>
+          </form>
         </div> 
+
         {/* Sign Up Container */}
         <div
           className={`form-container sign-up-container ${
@@ -260,24 +244,13 @@ function LoginandRegistration() {
               required
               title='Enter new password'
             />
-            {/* <button
-              type="submit"
-              className="mt-4 rounded-[20px] border border-[#3a91a5] bg-[#BAD8B6] text-white text-xs font-bold py-3 px-11 uppercase tracking-wider cursor-pointer transition-transform hover:opacity-90 active:scale-95"
-              disabled={loading}
-            >
-              {loading ? "Signing Up..." : "Sign Up"}
-            </button> */}
              <button 
-             type="submit" className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group">
-              {/* <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
-                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span>
-              <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
-                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span> */}
-              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"></span>
-              <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
-              {loading ? "Signing Up..." : "Sign Up"}
+              type="submit"
+              className="relative flex items-center justify-center w-[100px] px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group"
+            >
+              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-100 -translate-x-full bg-indigo-600 group-hover:translate-x-0"></span>
+              <span className="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-white">
+                {loading ? "Signing Up..." : "Sign Up"}
               </span>
             </button>
             <div className="mt-8 text-l text-gray-700 flex flex-col md:flex-row ">
@@ -290,7 +263,6 @@ function LoginandRegistration() {
                Sign In
             </Link>  
             </div>
-
           </form>
         </div>
 

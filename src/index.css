@@ -8,7 +8,7 @@ body {
   font-family: "Poppins", serif;
   background-color: #F8FAFC;
 }
-.right-panel-active .sign-in-container {
+/* .right-panel-active .sign-in-container {
   transform: translateX(-100%);
 }
 .right-panel-active .sign-up-container {
@@ -51,29 +51,39 @@ body {
     opacity: 1;
     z-index: 5;
   }
-}
+} */
 
-/* @media (min-width: 768px) {
+@media (min-width: 768px) {
   .container.right-panel-active .sign-in-container {
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
 
   .container.right-panel-active .sign-up-container {
-    transform: translateX(100%);
+    transform: translateX(0);
     opacity: 1;
     z-index: 5;
     animation: show 0.6s;
   }
 
   .container.right-panel-active .overlay-container {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
-
+  
   .container.right-panel-active .overlay {
     transform: translateX(50%);
   }
 
+  .overlay-left {
+    transform: translateX(20%);
+  }
+
   .container.right-panel-active .overlay-left {
+    transform: translateX(0);
+  }
+
+  
+  .overlay-right {
+    right: 0;
     transform: translateX(0);
   }
 
@@ -94,7 +104,7 @@ body {
     opacity: 1;
     z-index: 5;
   }
-} */
+}
 
 /* Targeting iPad Mini 4 in Portrait Mode */
 /* @media (device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
@@ -121,9 +131,8 @@ body {
     transform: translateX(0);
   }
 
-  .container.right-panel-active .overlay-right {
-    transform: translateX(20%);
-  }
-}  */
+  .container.right-panel-active .overlay-right {/* Global Styles */
+
+
 
 
