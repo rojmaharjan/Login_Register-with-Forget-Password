@@ -103,7 +103,7 @@ function LoginandRegistration() {
   };
 
   return (
-    <div className=" w-full bg-[#] flex items-center justify-center ">
+    <div className=" w-full bg-[#] flex items-center justify-center  ">
       <div
         className={`container bg-[#F9F6E6] relative overflow-hidden w-[full] max-w-full ${
           isPanelActive ? "right-panel-active" : ""
@@ -179,9 +179,9 @@ function LoginandRegistration() {
               <br/>
               <button 
                 type="submit"
-                className="relative flex items-center justify-center w-[100px] px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group"
+                className="relative flex items-center  px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group"
               >
-                <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-100 -translate-x-full bg-indigo-600 group-hover:translate-x-0"></span>
+                <span className="absolute bottom-0 left-0 w-full transition-all duration-500 ease-in-out delay-100 -translate-x-full bg-indigo-600 group-hover:translate-x-0"></span>
                 <span className="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-white">
                   {loading ? "Signing In..." : "Login"}
                 </span>
@@ -246,7 +246,7 @@ function LoginandRegistration() {
             />
              <button 
               type="submit"
-              className="relative flex items-center justify-center w-[100px] px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group"
+              className="relative flex items-center px-6 py-3 overflow-hidden text-xs transition-all bg-blue-500 rounded-[5px] group"
             >
               <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-100 -translate-x-full bg-indigo-600 group-hover:translate-x-0"></span>
               <span className="relative w-full text-center text-white transition-colors duration-200 ease-in-out group-hover:text-white">
@@ -276,7 +276,7 @@ function LoginandRegistration() {
             </div>
             {/* Sign In Picture */}
             <div className="overlay-panel overlay-right bg-[url('Pictures/loginn.png')] bg-[#8EB486]
-             bg-contain bg-no-repeat bg-[length:91%] bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full  w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
+             bg-contain bg-no-repeat bg-[length:94%] bg-center absolute flex items-center  flex-col p-10 text-center top-0 h-full  w-1/2 transform translate-x-0 transition-transform duration-600 right-0">
             </div>
           </div>
         </div>
